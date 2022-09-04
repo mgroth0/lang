@@ -15,7 +15,6 @@ enum class KotlinPlatform {
 
 expect val currentPlatform: KotlinPlatform
 
-
 expect fun unixTime(): Duration
 expect fun preciseTime(): Duration
 
@@ -159,6 +158,7 @@ val MUST_USE_SUBCLASS: Nothing get() = throw MustUseSubclassException()
 val NOT_IMPLEMENTED: Nothing get() = throw NotImplementedError()
 val BAD_ARG: Nothing get() = throw IllegalArgumentException()
 val NEVER: Nothing get() = err("NEVER")
+val ILLEGAL: Nothing get() = err("Illegal Call")
 
 fun listsEqual(list1: List<*>, list2: List<*>): Boolean {
 

@@ -81,3 +81,4 @@ val os: String by lazy { System.getProperty("os.name") }
 val userName: String by lazy { System.getProperty("user.name") }
 val userHome: String by lazy { System.getProperty("user.home") }
 val arch: String by lazy { System.getProperty("os.arch") }
+
