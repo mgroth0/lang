@@ -300,6 +300,7 @@ annotation class Recycle
 annotation class TemporaryCode
 annotation class ExperimentalCode
 annotation class DoesNotAlwaysWork
+
 @Target(AnnotationTarget.FILE, CLASS) /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
 annotation class See(val link: KClass<*>)
 
@@ -326,4 +327,4 @@ inline fun <reified R> untilIs(op: ()->Any?): R {
 }
 
 
-
+fun repeat(times: Long, op: (Int)->Unit) = kotlin.repeat(times.toInt(), op)
