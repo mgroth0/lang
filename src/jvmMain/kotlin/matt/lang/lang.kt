@@ -7,6 +7,7 @@ import matt.lang.KotlinPlatform.JVM
 import java.lang.management.ManagementFactory
 import java.lang.management.RuntimeMXBean
 import java.net.InetAddress
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty0
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
