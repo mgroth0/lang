@@ -329,3 +329,6 @@ inline fun <reified R> untilIs(op: ()->Any?): R {
 
 fun repeat(times: Long, op: (Int)->Unit) = kotlin.repeat(times.toInt(), op)
 
+
+fun Any?.print() = print(this)
+fun Any?.println() = println(this)
