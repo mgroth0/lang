@@ -1,8 +1,11 @@
+@file:OptIn(ExperimentalContracts::class)
+
 package matt.lang
 
 import kotlin.annotation.AnnotationTarget.CLASS
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind.AT_LEAST_ONCE
+import kotlin.contracts.InvocationKind.AT_MOST_ONCE
 import kotlin.contracts.InvocationKind.EXACTLY_ONCE
 import kotlin.contracts.contract
 import kotlin.reflect.KClass
@@ -19,6 +22,9 @@ expect fun unixTime(): Duration
 expect fun preciseTime(): Duration
 
 infix fun Boolean.ifTrue(op: ()->Unit) {
+  contract {
+	callsInPlace(op, AT_MOST_ONCE)
+  }
   if (this) op()
 }
 
