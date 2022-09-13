@@ -338,3 +338,6 @@ fun repeat(times: Long, op: (Int)->Unit) = kotlin.repeat(times.toInt(), op)
 
 fun Any?.print() = print(this)
 fun Any?.println() = println(this)
+
+
+fun <E: Comparable<E>> comparableComparator(): Comparator<E> = Comparator { a, b -> a.compareTo(b) }
