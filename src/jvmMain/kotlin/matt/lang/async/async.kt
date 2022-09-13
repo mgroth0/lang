@@ -11,3 +11,5 @@ fun everyDaemon(d: Duration, first: EveryFirst, op: ()->Unit) =
   GlobalScope.launch(kotlinx.coroutines.newSingleThreadContext("every $d")) {
 	every(d = d, first = first, op = op)
   }
+
+
