@@ -342,3 +342,5 @@ fun Any?.println() = println(this)
 
 fun <E: Comparable<E>> comparableComparator(): Comparator<E> = Comparator { a, b -> a.compareTo(b) }
 
+val List<*>.firstIndex get() = if (isEmpty()) -1 else 0
+val List<*>.lastIndex get() = size - 1
