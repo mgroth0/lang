@@ -7,8 +7,8 @@ import matt.lang.KotlinPlatform.JVM
 import java.lang.management.ManagementFactory
 import java.lang.management.RuntimeMXBean
 import java.net.InetAddress
-import kotlin.reflect.KClass
 import kotlin.reflect.KProperty0
+import kotlin.reflect.jvm.isAccessible
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
 
@@ -32,17 +32,17 @@ fun resourceStream(name: String) =
 
 fun Any.toStringBuilder(vararg props: KProperty0<*>): String {
   val suffix = if (props.isEmpty()) "@" + this.hashCode() else "with " + props.joinToString(" ") {
-	@Suppress("NO_REFLECTION_IN_CLASS_PATH") /*it is?*/
+	it.isAccessible = true
 	it.name + "=" + it.call().toString()
   }
-  return "[${0::class}$suffix]"
+  return "[${this::class} $suffix]"
 }
 
 fun Any.toStringBuilder(vararg values: Pair<String, Any?>): String {
   val suffix = if (values.isEmpty()) "@" + this.hashCode() else "with " + values.joinToString(" ") {
 	it.first + "=" + it.second
   }
-  return "[${0::class}$suffix]"
+  return "[${this::class} $suffix]"
 }
 
 
