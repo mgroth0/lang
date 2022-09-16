@@ -30,20 +30,6 @@ fun resourceStream(name: String) =
   ClassLoader.getSystemClassLoader().getResourceAsStream(name)
 
 
-fun Any.toStringBuilder(vararg props: KProperty0<*>): String {
-  val suffix = if (props.isEmpty()) "@" + this.hashCode() else "with " + props.joinToString(" ") {
-	it.isAccessible = true
-	it.name + "=" + it.call().toString()
-  }
-  return "[${this::class} $suffix]"
-}
-
-fun Any.toStringBuilder(vararg values: Pair<String, Any?>): String {
-  val suffix = if (values.isEmpty()) "@" + this.hashCode() else "with " + values.joinToString(" ") {
-	it.first + "=" + it.second
-  }
-  return "[${this::class} $suffix]"
-}
 
 
 enum class Env {
