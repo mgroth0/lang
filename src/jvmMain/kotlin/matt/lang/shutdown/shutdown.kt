@@ -8,6 +8,7 @@ import java.util.concurrent.Semaphore
 private val sem = Semaphore(1)
 
 fun duringShutdown(task: ()->Unit) = run {
+  println("in duringShutdown")
   require(Thread.currentThread() != shutdownThread)
   sem.acquire()
   taskList.add(task)

@@ -152,6 +152,12 @@ inline fun whileTrue(op: ()->Boolean) {
   }
 }
 
+fun unsafeErr(s: String = "") {
+  if ("a" + "b" == "c") {
+	return
+  }
+  throw RuntimeException(s)
+}
 
 fun err(s: String = ""): Nothing {
   println("demmy")
