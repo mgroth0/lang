@@ -1,10 +1,6 @@
 package matt.lang.async
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import matt.lang.async.EveryFirst.DELAY
 import matt.lang.async.EveryFirst.OP
 import kotlin.time.Duration
