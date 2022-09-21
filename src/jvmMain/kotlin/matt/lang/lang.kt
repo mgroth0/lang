@@ -7,13 +7,20 @@ import matt.lang.KotlinPlatform.JVM
 import java.lang.management.ManagementFactory
 import java.lang.management.RuntimeMXBean
 import java.net.InetAddress
+import kotlin.contracts.InvocationKind.EXACTLY_ONCE
+import kotlin.contracts.contract
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
 
 actual fun unixTime() = System.currentTimeMillis().milliseconds
 actual fun preciseTime() = System.nanoTime().nanoseconds
 
-fun <R> Any.sync(op: ()->R): R = synchronized(this, op)
+ inline fun <R> Any.sync(op: ()->R): R {
+  contract {
+    callsInPlace(op, EXACTLY_ONCE)
+  }
+  return synchronized(this, op)
+}
 
 
 val RUNTIME by lazy { Runtime.getRuntime()!! }
@@ -26,8 +33,6 @@ fun resourceTxt(name: String) = resourceStream(name)?.bufferedReader()?.readText
 
 fun resourceStream(name: String) =
   ClassLoader.getSystemClassLoader().getResourceAsStream(name)
-
-
 
 
 enum class Env {
@@ -66,7 +71,6 @@ val os: String by lazy { System.getProperty("os.name") }
 val userName: String by lazy { System.getProperty("user.name") }
 val userHome: String by lazy { System.getProperty("user.home") }
 val arch: String by lazy { System.getProperty("os.arch") }
-
 
 
 const val DO_NOT_SHUTDOWN_WITH_FX_THREAD =
