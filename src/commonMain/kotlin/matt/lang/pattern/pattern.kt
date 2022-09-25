@@ -1,4 +1,4 @@
-package matt.lang.whenlang
+package matt.lang.pattern
 
 import kotlin.random.Random
 
