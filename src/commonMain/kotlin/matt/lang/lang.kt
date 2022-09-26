@@ -352,3 +352,7 @@ val List<*>.firstIndex get() = if (isEmpty()) -1 else 0
 val List<*>.lastIndex get() = size - 1
 
 object Undefined
+
+typealias List2D<T> = List<List<T>>
+typealias List3D<T> = List<List2D<T>>
+typealias List4D<T> = List<List3D<T>>
