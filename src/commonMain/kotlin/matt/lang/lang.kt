@@ -350,3 +350,5 @@ fun <E: Comparable<E>> comparableComparator(): Comparator<E> = Comparator { a, b
 
 val List<*>.firstIndex get() = if (isEmpty()) -1 else 0
 val List<*>.lastIndex get() = size - 1
+
+object Undefined
