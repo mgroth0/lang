@@ -49,7 +49,7 @@ inline fun until(stopAt: Long, op: ()->Unit) {
   }
 }
 
-actual val currentPlatform = JVM
+actual val currentPlatform by lazy { JVM }
 
 
 fun mAssert(b: Boolean) {

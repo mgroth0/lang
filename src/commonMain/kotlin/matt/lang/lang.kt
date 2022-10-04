@@ -52,7 +52,6 @@ fun inlined(op: ()->Unit) {
 }
 
 
-
 val Any.void get() = Unit
 
 
@@ -345,3 +344,5 @@ object Undefined
 typealias List2D<T> = List<List<T>>
 typealias List3D<T> = List<List2D<T>>
 typealias List4D<T> = List<List3D<T>>
+
+inline fun disabledCode(@Suppress("UNUSED_PARAMETER") op: ()->Unit) = Unit
