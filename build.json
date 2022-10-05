@@ -8,11 +8,6 @@
 	},
 	{
 	  "type" : "matt.mstruct.bj.BuildJsonLibDependency",
-	  "cfg" :  "commonMainApi",
-	  "key" :  "kt-reflect"
-	},
-	{
-	  "type" : "matt.mstruct.bj.BuildJsonLibDependency",
 	  "cfg" :  "jsMainApi",
 	  "key" :  "kt-stdlib-js"
 	}
