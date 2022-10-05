@@ -13,13 +13,12 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.nanoseconds
 
 
-
 actual fun unixTime() = System.currentTimeMillis().milliseconds
 actual fun preciseTime() = System.nanoTime().nanoseconds
 
- inline fun <R> Any.sync(op: ()->R): R {
+inline fun <R> Any.sync(op: ()->R): R {
   contract {
-    callsInPlace(op, EXACTLY_ONCE)
+	callsInPlace(op, EXACTLY_ONCE)
   }
   return synchronized(this, op)
 }
@@ -77,3 +76,4 @@ val arch: String by lazy { System.getProperty("os.arch") }
 
 const val DO_NOT_SHUTDOWN_WITH_FX_THREAD =
   "NEVER RELY ON JAVAFX APPLICATION.STOP() FOR ANY SHUTDOWN THINGS. DESIGN MY PROGRAM TO NOT RELY ON THE FX THREAD FOR ANY KIND OF CLEANUP AT ALL! Application.stop() does not reliable execute when kill signals are raised and the JavaFX thread is unresponsive to runLater or even Platform.exit() inside of shutdown hooks. In general, I should do everything possible to keep the MY shutdown process in MY control, and not rely on understanding whatever weird stuff and shutdown hooks the javafx programmers made for their \"special\" thread"
+
