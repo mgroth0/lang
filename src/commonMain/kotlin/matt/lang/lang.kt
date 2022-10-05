@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalContracts::class)
-
 package matt.lang
 
 import kotlin.annotation.AnnotationTarget.CLASS
@@ -60,7 +58,6 @@ infix fun <A, B, C> Pair<A, B>.trip(third: C): Triple<A, B, C> {
 }
 
 
-@OptIn(ExperimentalContracts::class)
 inline fun <T: Any> T.alsoPrintln(op: T.()->String): T {
   contract {
 	callsInPlace(op, EXACTLY_ONCE)
@@ -70,7 +67,6 @@ inline fun <T: Any> T.alsoPrintln(op: T.()->String): T {
 }
 
 
-@ExperimentalContracts
 inline fun <T: Any> T.go(block: (T)->Unit) {
   contract {
 	callsInPlace(block, EXACTLY_ONCE)
@@ -79,7 +75,6 @@ inline fun <T: Any> T.go(block: (T)->Unit) {
 }
 
 
-@ExperimentalContracts
 inline fun <T: Any> T.applyIt(block: T.(T)->Unit): T {
   contract {
 	callsInPlace(block, EXACTLY_ONCE)
