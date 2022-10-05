@@ -94,6 +94,7 @@ fun <T: Any> T.ifIsNot(other: Any?) = when (other) {
 typealias B = Boolean
 typealias S = String
 typealias I = Int
+typealias F = Float
 typealias D = Double
 typealias L = Long
 typealias Num = Number
