@@ -18,7 +18,7 @@ expect val currentPlatform: KotlinPlatform
 expect fun unixTime(): Duration
 expect fun preciseTime(): Duration
 
-infix fun Boolean.ifTrue(op: ()->Unit) {
+inline infix fun Boolean.ifTrue(op: ()->Unit) {
   contract {
 	callsInPlace(op, AT_MOST_ONCE)
   }
