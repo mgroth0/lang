@@ -15,11 +15,6 @@
 	  "type" : "matt.mstruct.bj.BuildJsonLibDependency",
 	  "cfg" :  "jsMainApi",
 	  "key" :  "kt-stdlib-js"
-	},
-	{
-	  "type" : "matt.mstruct.bj.BuildJsonLibDependency",
-	  "cfg" :  "commonMainApi",
-	  "key" :  "kotlinx-datetime"
 	}
   ]
 }
