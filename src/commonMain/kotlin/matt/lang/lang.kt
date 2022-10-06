@@ -278,7 +278,7 @@ fun <R> nullIfExceptions(op: ()->R): R? {
 }
 
 fun opt(b: Boolean, s: Any): Array<out Any> = if (b) arrayOf(s) else arrayOf()
-fun <T> opt(a: T?, s: T.()->Any): Array<out Any> = if (a != null) arrayOf(s(a)) else arrayOf()
+inline fun <T, reified R> opt(a: T?, s: T.()->R): Array<out R> = if (a != null) arrayOf(s(a)) else arrayOf()
 fun <R> ifOrNull(b: Boolean, op: ()->R) = if (b) op() else null
 
 class If(val b: Boolean) {
@@ -294,6 +294,7 @@ annotation class Recycle
 annotation class TemporaryCode
 annotation class ExperimentalCode
 annotation class DoesNotAlwaysWork
+annotation class MergeWith(vararg val classes: KClass<*>)
 
 @Target(AnnotationTarget.FILE, CLASS) /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
 annotation class See(val link: KClass<*>)
