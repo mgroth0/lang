@@ -291,6 +291,7 @@ fun <T> T.scope(op: T.()->Unit) {
 }
 
 
+annotation class GeneralizationCandidate
 annotation class Recycle
 annotation class TemporaryCode
 annotation class ExperimentalCode
