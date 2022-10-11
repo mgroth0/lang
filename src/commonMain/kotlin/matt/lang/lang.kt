@@ -5,6 +5,7 @@ import kotlin.contracts.InvocationKind.AT_LEAST_ONCE
 import kotlin.contracts.InvocationKind.AT_MOST_ONCE
 import kotlin.contracts.InvocationKind.EXACTLY_ONCE
 import kotlin.contracts.contract
+import kotlin.random.Random
 import kotlin.reflect.KClass
 import kotlin.time.Duration
 
@@ -343,4 +344,11 @@ typealias List3D<T> = List<List2D<T>>
 typealias List4D<T> = List<List3D<T>>
 
 inline fun disabledCode(@Suppress("UNUSED_PARAMETER") op: ()->Unit) = Unit
+
+inline fun disabledButDefinitelyStillInByteCodeCode(op: ()->Unit) {
+  val makeSureUnusedCodeIsNotErased = Random.nextDouble()
+  if (makeSureUnusedCodeIsNotErased == 11345.13451435) {
+	op()
+  }
+}
 
