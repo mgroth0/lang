@@ -352,3 +352,5 @@ inline fun disabledButDefinitelyStillInByteCodeCode(op: ()->Unit) {
   }
 }
 
+
+object YesIUseLang
