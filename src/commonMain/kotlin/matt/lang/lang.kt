@@ -279,11 +279,17 @@ fun <R> nullIfExceptions(op: ()->R): R? {
 }
 
 fun opt(b: Boolean, s: Any): Array<out Any> = if (b) arrayOf(s) else arrayOf()
+
 inline fun <T, reified R> opt(a: T?, s: T.()->R): Array<out R> = if (a != null) arrayOf(s(a)) else arrayOf()
+
 fun <R> ifOrNull(b: Boolean, op: ()->R) = if (b) op() else null
 
+inline fun <reified R> ifTrue(b: Boolean, op: ()->R): Array<out R> = if (b) arrayOf(op()) else arrayOf()
+inline fun <reified R> ifFalse(b: Boolean, op: ()->R): Array<out R> = if (!b) arrayOf(op()) else arrayOf()
+
 class If(val b: Boolean) {
-  fun then(vararg s: Any?): Array<out Any?> = if (b) s else arrayOf()
+  inline fun <reified R> then(vararg s: R): Array<out R> = if (b) s else arrayOf()
+  inline operator fun <reified R> invoke(op: ()->R): Array<out R> = if (b) arrayOf(op()) else arrayOf()
 }
 
 /*sometimes I want to use [[apply]] but enforce that it has not return value*/
