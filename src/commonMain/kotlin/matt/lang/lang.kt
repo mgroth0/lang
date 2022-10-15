@@ -106,7 +106,9 @@ infix fun <T> MutableCollection<T>.setAll(c: Collection<T>) {
     is ObservableList<T>
   }*/
   clear()
-  c.forEach { add(it) }
+  c.forEach {
+	add(it)
+  }
 }
 
 fun <T> MutableCollection<T>.setAll(vararg c: T) {
