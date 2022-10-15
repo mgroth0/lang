@@ -300,6 +300,7 @@ fun <T> T.scope(op: T.()->Unit) {
 
 annotation class GeneralizationCandidate
 annotation class Recycle
+annotation class NeedsTest
 annotation class TemporaryCode
 annotation class ExperimentalCode
 annotation class DoesNotAlwaysWork
