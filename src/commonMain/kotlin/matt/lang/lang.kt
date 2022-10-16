@@ -111,6 +111,32 @@ infix fun <T> MutableCollection<T>.setAll(c: Collection<T>) {
   }
 }
 
+fun <T> Iterator<T>.toList(): List<T> {
+  val list = mutableListOf<T>()
+  while (hasNext()) {
+	list += next()
+  }
+  return list
+}
+
+fun <T> MutableList<T>.setAllOneByOne(iterable: Iterable<T>) {
+  val itr = iterable.iterator()
+  var i = 0
+  while (itr.hasNext()) {
+	require(this.size <= i)
+	if (this.size == i) {
+	  addAll(itr.toList())
+	  break
+	}
+	val next = itr.next()
+	if (this[i] != next) {
+	  this[i] = next
+	}
+	i++
+  }
+  if (i < this.size - 1) subList(i, size - 1).clear()
+}
+
 fun <T> MutableCollection<T>.setAll(vararg c: T) {
   clear()
   c.forEach { add(it) }
