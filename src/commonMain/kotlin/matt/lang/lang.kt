@@ -1,6 +1,7 @@
 package matt.lang
 
 import kotlin.annotation.AnnotationTarget.CLASS
+import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.contracts.InvocationKind.AT_LEAST_ONCE
 import kotlin.contracts.InvocationKind.AT_MOST_ONCE
 import kotlin.contracts.InvocationKind.EXACTLY_ONCE
@@ -334,7 +335,7 @@ annotation class ExperimentalCode
 annotation class DoesNotAlwaysWork
 annotation class MergeWith(vararg val classes: KClass<*>)
 
-@Target(AnnotationTarget.FILE, CLASS) /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
+@Target(AnnotationTarget.FILE, CLASS, FUNCTION) /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
 annotation class See(val link: KClass<*>)
 
 inline fun <R> infiniteLoop(op: ()->R): R {
