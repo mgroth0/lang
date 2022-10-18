@@ -5,7 +5,7 @@ import matt.lang.delegation.valProp
 import matt.lang.sync.inSync
 import kotlin.reflect.KProperty
 
-fun <R, T: Any> lazyWeak(op: ()->T) = provider {
+fun <T: Any> lazyWeak(op: ()->T) = provider {
   var ref: WeakRef<T>? = null
   val monitor = object {}
   valProp {
@@ -17,7 +17,7 @@ fun <R, T: Any> lazyWeak(op: ()->T) = provider {
   }
 }
 
-fun <R, T: Any> lazySoft(op: ()->T) = provider {
+fun <T: Any> lazySoft(op: ()->T) = provider {
   var ref: SoftRef<T>? = null
   val monitor = object {}
   valProp {
