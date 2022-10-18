@@ -390,3 +390,6 @@ inline fun disabledButDefinitelyStillInByteCodeCode(op: ()->Unit) {
 
 
 object YesIUseLang
+
+
+fun Any.toStringBasic() = "${this::class.simpleName}@${this.hashCode()}"
