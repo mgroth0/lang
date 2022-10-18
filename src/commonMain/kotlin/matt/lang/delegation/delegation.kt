@@ -60,6 +60,10 @@ fun <V, P: ReadOnlyProperty<Any?, V>> fullProvider(
   provideDelegate: (thisRef: Any?, prop: KProperty<*>)->P
 ) = PropertyDelegateProvider { thisRef: Any?, property -> provideDelegate(thisRef, property) }
 
+fun <V> Any.valProp(
+  op: ()->V
+) = ReadOnlyProperty { _: Any, _ -> op() }
+
 fun <R, V> valProp(
   op: ()->V
 ) = ReadOnlyProperty { _: R, _ -> op() }
