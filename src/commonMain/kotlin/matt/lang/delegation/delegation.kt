@@ -52,9 +52,9 @@ fun <V, P: ReadOnlyProperty<Any?, V>> provider(
   provideDelegate: (pName: String)->P
 ) = PropertyDelegateProvider { _: Any?, property -> provideDelegate(property.name) }
 
-fun <V, P: ReadOnlyProperty<Any, V>> Any.fullProvider(
-  provideDelegate: (thisRef: Any, prop: KProperty<*>)->P
-) = PropertyDelegateProvider { thisRef: Any, property -> provideDelegate(thisRef, property) }
+fun <R, V, P: ReadOnlyProperty<R, V>> R.fullProvider(
+  provideDelegate: (thisRef: R, prop: KProperty<*>)->P
+) = PropertyDelegateProvider { thisRef: R, property -> provideDelegate(thisRef, property) }
 
 fun <V, P: ReadOnlyProperty<Any?, V>> fullProvider(
   provideDelegate: (thisRef: Any?, prop: KProperty<*>)->P
