@@ -44,6 +44,9 @@ fun <R, V> varProp(
 */
 
 
+fun <R, V, P: ReadOnlyProperty<R, V>> provider(
+  provideDelegate: (pName: String)->P
+) = PropertyDelegateProvider { _: R, property -> provideDelegate(property.name) }
 
 fun <V, P: ReadOnlyProperty<Any?, V>> provider(
   provideDelegate: (pName: String)->P
@@ -53,9 +56,9 @@ fun <V, P: ReadOnlyProperty<Any?, V>> fullProvider(
   provideDelegate: (thisRef: Any?, prop: KProperty<*>)->P
 ) = PropertyDelegateProvider { thisRef: Any?, property -> provideDelegate(thisRef, property) }
 
-fun <V> valProp(
+fun <R, V> valProp(
   op: ()->V
-) = ReadOnlyProperty { _: Any?, _ -> op() }
+) = ReadOnlyProperty { _: R, _ -> op() }
 
 fun <V> varProp(
   getter: ()->V,
