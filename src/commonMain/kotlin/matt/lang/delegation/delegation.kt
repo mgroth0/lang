@@ -44,9 +44,9 @@ fun <R, V> varProp(
 */
 
 
-fun <R, V, P: ReadOnlyProperty<R, V>> provider(
+fun <V, P: ReadOnlyProperty<Any, V>> Any.provider(
   provideDelegate: (pName: String)->P
-) = PropertyDelegateProvider { _: R, property -> provideDelegate(property.name) }
+) = PropertyDelegateProvider { _: Any, property -> provideDelegate(property.name) }
 
 fun <V, P: ReadOnlyProperty<Any?, V>> provider(
   provideDelegate: (pName: String)->P
