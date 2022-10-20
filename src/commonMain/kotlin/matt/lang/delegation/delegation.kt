@@ -80,5 +80,19 @@ fun <V> varProp(
   override fun setValue(thisRef: Any?, property: KProperty<*>, value: V) {
 	setter(value)
   }
+}
 
+fun <T, V> lazyDelegate(getDelegate: ()->ReadOnlyProperty<T, V>) = object: LazyDelegate<T, V>() {
+  override fun getDelegate() = getDelegate()
+}
+
+abstract class LazyDelegate<T, V>: ReadOnlyProperty<T, V> {
+  protected abstract fun getDelegate(): ReadOnlyProperty<T, V>
+  private val myDelegate by lazy {
+	getDelegate()
+  }
+
+  override fun getValue(thisRef: T, property: KProperty<*>): V {
+	return myDelegate.getValue(thisRef, property)
+  }
 }
