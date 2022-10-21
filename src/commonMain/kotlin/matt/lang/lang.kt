@@ -393,3 +393,4 @@ object YesIUseLang
 
 
 fun Any.toStringBasic() = "${this::class.simpleName}@${this.hashCode()}"
+
