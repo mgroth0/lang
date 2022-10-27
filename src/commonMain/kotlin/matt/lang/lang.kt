@@ -333,10 +333,15 @@ annotation class NeedsTest
 annotation class TemporaryCode
 annotation class ExperimentalCode
 annotation class DoesNotAlwaysWork
+annotation class NullToReduceObjects
 annotation class MergeWith(vararg val classes: KClass<*>)
 
-@Target(AnnotationTarget.FILE, CLASS, FUNCTION) /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
+@Target(AnnotationTarget.FILE, CLASS, FUNCTION)
+/*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
 annotation class See(val link: KClass<*>)
+
+
+
 
 inline fun <R> infiniteLoop(op: ()->R): R {
   while (true) {
@@ -394,3 +399,5 @@ object YesIUseLang
 
 fun Any.toStringBasic() = "${this::class.simpleName}@${this.hashCode()}"
 
+
+typealias Op = ()->Unit
