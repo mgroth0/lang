@@ -401,3 +401,5 @@ fun Any.toStringBasic() = "${this::class.simpleName}@${this.hashCode()}"
 
 
 typealias Op = ()->Unit
+typealias Produce<T> = ()->T
+typealias On<T> = (T)->Unit
