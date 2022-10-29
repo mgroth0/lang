@@ -402,4 +402,8 @@ fun Any.toStringBasic() = "${this::class.simpleName}@${this.hashCode()}"
 
 typealias Op = ()->Unit
 typealias Produce<T> = ()->T
+typealias Pred = Produce<Boolean>
 typealias On<T> = (T)->Unit
+
+/*its nicer to read sometimes. more like english*/
+fun not(b: Boolean) = !b
