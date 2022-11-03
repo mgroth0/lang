@@ -7,3 +7,7 @@ actual inline fun <R> inSync(monitor: Any, op: ()->R): R {
 	op()
   }
 }
+
+actual fun stackSize(): Int {
+  return Thread.getAllStackTraces().size
+}

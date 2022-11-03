@@ -14,3 +14,5 @@ fun <R> inSync(monitors: List<Any>, op: ()->R): R {
 	}
   }.invoke()
 }
+
+expect fun stackSize(): Int
