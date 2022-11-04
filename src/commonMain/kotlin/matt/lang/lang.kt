@@ -402,3 +402,5 @@ fun Any.toStringBasic() = "${this::class.simpleName}@${this.hashCode()}"
 
 /*its nicer to read sometimes. more like english*/
 fun not(b: Boolean) = !b
+
+infix fun Any.`is`(clazz: KClass<*>) = clazz.isInstance(this)
