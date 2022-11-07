@@ -1,7 +1,5 @@
 package matt.lang
 
-import kotlin.annotation.AnnotationTarget.CLASS
-import kotlin.annotation.AnnotationTarget.FUNCTION
 import kotlin.contracts.InvocationKind.AT_LEAST_ONCE
 import kotlin.contracts.InvocationKind.AT_MOST_ONCE
 import kotlin.contracts.InvocationKind.EXACTLY_ONCE
@@ -10,6 +8,14 @@ import kotlin.random.Random
 import kotlin.reflect.KClass
 import kotlin.time.Duration
 
+fun <T> l(): List<T> = emptyList()
+fun <T> l(vararg elements: T): List<T> = listOf(*elements)
+
+fun <T> s(): Set<T> = emptySet()
+fun <T> s(vararg elements: T): Set<T> = setOf(*elements)
+
+fun <K, V> m(): Map<K, V> = emptyMap()
+fun <K, V> m(vararg pairs: Pair<K, V>): Map<K, V> = mapOf(*pairs)
 
 enum class KotlinPlatform {
   JVM, JS, Native
@@ -45,8 +51,7 @@ inline fun <reified T: Any> T.inArray(): Array<T> {
   return arrayOf(this)
 }
 
-fun inlined(op: ()->Unit) {
-  //    Pleasework()
+fun inlined(op: ()->Unit) { //    Pleasework()
   op()
 }
 
@@ -102,8 +107,7 @@ typealias L = Long
 typealias Num = Number
 
 
-infix fun <T> MutableCollection<T>.setAll(c: Collection<T>) {
-  /*when (this) {
+infix fun <T> MutableCollection<T>.setAll(c: Collection<T>) {/*when (this) {
     is ObservableList<T>
   }*/
   clear()
@@ -159,8 +163,7 @@ inline fun whileTrue(op: ()->Boolean) {
   contract {
 	callsInPlace(op, AT_LEAST_ONCE)
   }
-  @Suppress("ControlFlowWithEmptyBody")
-  while (op()) {
+  @Suppress("ControlFlowWithEmptyBody") while (op()) {
   }
 }
 
@@ -186,8 +189,7 @@ val ILLEGAL: Nothing get() = err("Illegal Call")
 
 fun listsEqual(list1: List<*>, list2: List<*>): Boolean {
 
-  if (list1.size != list2.size)
-	return false
+  if (list1.size != list2.size) return false
 
   val pairList = list1.zip(list2)
 
@@ -202,10 +204,7 @@ sealed interface KotlinPrimitive {
 }
 
 enum class Ints(override val kls: KClass<*>): KotlinPrimitive {
-  Byte(kotlin.Byte::class),
-  Short(kotlin.Short::class),
-  Int(kotlin.Int::class),
-  Long(kotlin.Long::class),
+  Byte(kotlin.Byte::class), Short(kotlin.Short::class), Int(kotlin.Int::class), Long(kotlin.Long::class),
 }
 
 enum class IntArrays(override val kls: KClass<*>): KotlinPrimitive {
@@ -216,24 +215,18 @@ enum class IntArrays(override val kls: KClass<*>): KotlinPrimitive {
 }
 
 enum class FloatingPoints(override val kls: KClass<*>): KotlinPrimitive {
-  Float(kotlin.Float::class),
-  Double(kotlin.Double::class),
+  Float(kotlin.Float::class), Double(kotlin.Double::class),
 }
 
 enum class FloatingPointArrays(override val kls: KClass<*>): KotlinPrimitive {
-  FloatArray(kotlin.FloatArray::class),
-  DoubleArray(kotlin.DoubleArray::class),
+  FloatArray(kotlin.FloatArray::class), DoubleArray(kotlin.DoubleArray::class),
 }
 
 enum class UnsignedInts(override val kls: KClass<*>): KotlinPrimitive {
-  UByte(kotlin.UByte::class),
-  UShort(kotlin.UShort::class),
-  UInt(kotlin.UInt::class),
-  ULong(kotlin.ULong::class),
+  UByte(kotlin.UByte::class), UShort(kotlin.UShort::class), UInt(kotlin.UInt::class), ULong(kotlin.ULong::class),
 }
 
-@OptIn(ExperimentalUnsignedTypes::class)
-enum class UnsignedIntArrays(override val kls: KClass<*>): KotlinPrimitive {
+@OptIn(ExperimentalUnsignedTypes::class) enum class UnsignedIntArrays(override val kls: KClass<*>): KotlinPrimitive {
   /*unsigned arrays and ranges*/
   UByteArray(kotlin.UByteArray::class),
   UShortArray(kotlin.UShortArray::class),
@@ -310,6 +303,7 @@ fun <R> nullIfExceptions(op: ()->R): R? {
 fun opt(b: Boolean, s: Any): Array<out Any> = if (b) arrayOf(s) else arrayOf()
 
 inline fun <T, reified R> opt(a: T?, s: T.()->R): Array<out R> = if (a != null) arrayOf(s(a)) else arrayOf()
+inline fun <T, reified R> optArray(a: T?, s: T.()->Array<out R>): Array<out R> = if (a != null) s(a) else arrayOf()
 
 fun <R> ifOrNull(b: Boolean, op: ()->R) = if (b) op() else null
 
@@ -325,9 +319,6 @@ class If(val b: Boolean) {
 fun <T> T.scope(op: T.()->Unit) {
   op()
 }
-
-
-
 
 
 inline fun <R> infiniteLoop(op: ()->R): R {
