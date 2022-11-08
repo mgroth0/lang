@@ -25,13 +25,13 @@ annotation class MergeWith(vararg val classes: KClass<*>)
 /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
 annotation class See(val link: KClass<*>)
 
-@Target(EXPRESSION, LOCAL_VARIABLE)
+@Target(EXPRESSION, LOCAL_VARIABLE, CLASS)
 @Retention(SOURCE) /*needs to be source to be allowed on expression*/
 @Repeatable
 annotation class SeeURL(val url: String)
 
 
-@Target(EXPRESSION, LOCAL_VARIABLE)
+@Target(EXPRESSION, LOCAL_VARIABLE, CLASS)
 @Retention(SOURCE) /*needs to be source to be allowed on expression*/
 @Repeatable
 annotation class SeeURLs(vararg val url: String)
