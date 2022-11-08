@@ -19,3 +19,4 @@ annotation class MergeWith(vararg val classes: KClass<*>)
 @Target(AnnotationTarget.FILE, CLASS, FUNCTION)
 /*I would like this to be AnnotationTarget.ANY but that does not seem to exist*/
 annotation class See(val link: KClass<*>)
+annotation class SeeURL(val url: String)
