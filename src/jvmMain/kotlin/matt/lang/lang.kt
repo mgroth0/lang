@@ -4,6 +4,7 @@ package matt.lang
 
 
 import matt.lang.KotlinPlatform.JVM
+import matt.lang.anno.SeeURL
 import java.lang.management.ManagementFactory
 import java.lang.management.RuntimeMXBean
 import java.net.InetAddress
@@ -28,13 +29,6 @@ inline fun <R> Any.sync(op: ()->R): R {
 val RUNTIME by lazy { Runtime.getRuntime()!! }
 val RUNTIME_MX: RuntimeMXBean by lazy { ManagementFactory.getRuntimeMXBean() }
 
-/*Thing()::class.java.classLoader*/
-/*ClassLoader.getPlatformClassLoader()*/
-fun resourceTxt(name: String) = resourceStream(name)?.bufferedReader()?.readText()
-
-
-fun resourceStream(name: String) =
-  ClassLoader.getSystemClassLoader().getResourceAsStream(name)
 
 
 enum class Env {
@@ -96,4 +90,10 @@ fun runThread(
 	priority = priority,
 	block = block
   )
+}
+
+@SeeURL("https://stackoverflow.com/questions/35842/how-can-a-java-program-get-its-own-process-id")
+val myPid by lazy {
+  /*tested and works on a silicon, not sure about other OSs*/
+  ManagementFactory.getRuntimeMXBean().name.substringBefore("@")
 }
