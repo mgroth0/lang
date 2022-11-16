@@ -30,8 +30,8 @@ fun <T: Any> lazySoft(op: ()->T) = provider {
 }
 
 
-expect class WeakRef<T: Any>(value: T) {
-  fun deref(): T?
+expect open class WeakRef<T: Any>(value: T) {
+  open fun deref(): T?
 }
 
 operator fun <R: Any, T: Any> WeakRef<T>.getValue(thisRef: R, property: KProperty<*>): T? = deref()
@@ -39,4 +39,25 @@ operator fun <R: Any, T: Any> SoftRef<T>.getValue(thisRef: R, property: KPropert
 
 expect class SoftRef<T: Any>(value: T) {
   fun deref(): T?
+}
+
+
+class WeakPair<F: Any, S: Any>(first: F, second: S): WeakRef<Pair<F, S>>(first to second) {
+
+  private val firstRef = WeakRef(first)
+  private val secondRef = WeakRef(second)
+  private val pair
+	get() = firstRef.deref()?.let { f ->
+	  secondRef.deref()?.let { s ->
+		f to s
+	  }
+	}
+  val first get() = pair?.first
+  val second get() = pair?.second
+
+  operator fun component1() = first
+  operator fun component2() = second
+
+  override fun deref() = pair
+
 }

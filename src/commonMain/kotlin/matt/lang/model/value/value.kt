@@ -21,3 +21,10 @@ class Value<T>(override val value: T): ValueWrapper<T> {
 class LazyValue<T>(private val op: ()->T): ValueWrapper<T> {
   override val value by lazy { op() }
 }
+
+//
+//class LazyVariable<T>(private val op: ()->T): ValueWrapper<T> {
+//  override val value by lazy {
+//	op()
+//  }
+//}
