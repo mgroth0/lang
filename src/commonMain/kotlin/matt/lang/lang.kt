@@ -111,9 +111,10 @@ infix fun <T> MutableCollection<T>.setAll(c: Collection<T>) {/*when (this) {
     is ObservableList<T>
   }*/
   clear()
-  c.forEach {
+  addAll(c)
+  /*c.forEach {
 	add(it)
-  }
+  }*/
 }
 
 fun <T> Iterator<T>.toList(): List<T> {
