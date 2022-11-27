@@ -20,10 +20,12 @@ private object ShutdownExecutor {
   val taskList = ArrayList<()->Unit>()
 
   val shutdownThread by lazy {
-	Thread {
+	Thread() {
 	  sem.acquire()
 	  taskList.forEach { it() }
 	  sem.release()
+	}.apply {
+	  name = "Shutdown Thread"
 	}
   }
 
