@@ -12,6 +12,7 @@ import kotlin.reflect.KClass
 annotation class GeneralizationCandidate
 annotation class Recycle
 annotation class NeedsTest
+annotation class DoesNotNeedToBeSynchronized
 
 @Target(TYPEALIAS)
 annotation class TemporaryCode
