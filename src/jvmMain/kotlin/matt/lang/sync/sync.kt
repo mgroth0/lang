@@ -9,5 +9,9 @@ actual inline fun <R> inSync(monitor: Any, op: ()->R): R {
 }
 
 actual fun stackSize(): Int {
-  return Thread.getAllStackTraces().size
+  return Thread.currentThread().stackTrace.size
+  /*StackWalker.getInstance().walk {
+
+  }*/
+  //  return Thread.getAllStackTraces()[Thread.currentThread()].size
 }
