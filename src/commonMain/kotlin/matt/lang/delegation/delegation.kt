@@ -86,6 +86,10 @@ fun <T, V> lazyDelegate(getDelegate: ()->ReadOnlyProperty<T, V>) = object: LazyD
   override fun getDelegate() = getDelegate()
 }
 
+fun <T, V> lazyVarDelegate(getDelegate: ()->ReadWriteProperty<T, V>) = object: LazyVarDelegate<T, V>() {
+  override fun getDelegate() = getDelegate()
+}
+
 abstract class LazyDelegate<T, V>: ReadOnlyProperty<T, V> {
   protected abstract fun getDelegate(): ReadOnlyProperty<T, V>
   private val myDelegate by lazy {
@@ -94,5 +98,20 @@ abstract class LazyDelegate<T, V>: ReadOnlyProperty<T, V> {
 
   override fun getValue(thisRef: T, property: KProperty<*>): V {
 	return myDelegate.getValue(thisRef, property)
+  }
+}
+
+abstract class LazyVarDelegate<T, V>: ReadWriteProperty<T, V> {
+  protected abstract fun getDelegate(): ReadWriteProperty<T, V>
+  private val myDelegate by lazy {
+	getDelegate()
+  }
+
+  override fun getValue(thisRef: T, property: KProperty<*>): V {
+	return myDelegate.getValue(thisRef, property)
+  }
+
+  override fun setValue(thisRef: T, property: KProperty<*>, value: V) {
+	myDelegate.setValue(thisRef, property, value)
   }
 }
