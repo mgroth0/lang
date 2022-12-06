@@ -129,8 +129,8 @@ fun <T> MutableList<T>.setAllOneByOne(iterable: Iterable<T>) {
   val itr = iterable.iterator()
   var i = 0
   while (itr.hasNext()) {
-	require(this.size <= i)
-	if (this.size == i) {
+	require(size <= i)
+	if (size == i) {
 	  addAll(itr.toList())
 	  break
 	}
@@ -144,8 +144,28 @@ fun <T> MutableList<T>.setAllOneByOne(iterable: Iterable<T>) {
 }
 
 fun <T> MutableCollection<T>.setAll(vararg c: T) {
+
   clear()
   c.forEach { add(it) }
+
+}
+
+fun <E> MutableList<E>.setAllWithMinimalChanges(vararg c: E) {
+  var nextIndex = 0
+  (0 until minOf(c.size, size)).forEachIndexed { i, it ->
+	if (get(i) != it) {
+	  set(i, c[it])
+	}
+	nextIndex = i + 1
+  }
+
+  if (size > c.size) {
+	subList(nextIndex, size).clear()
+  } else if (c.size > size) {
+	(nextIndex until c.size).forEach {
+	  add(c[it])
+	}
+  }
 }
 
 fun <T> MutableCollection<T>.addAll(vararg c: T) = addAll(c)
