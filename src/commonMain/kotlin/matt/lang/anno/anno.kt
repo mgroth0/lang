@@ -17,6 +17,7 @@ annotation class DoesNotNeedToBeSynchronized
 @Target(TYPEALIAS)
 annotation class TemporaryCode
 annotation class ExperimentalCode
+annotation class PhaseOut
 annotation class DoesNotAlwaysWork
 annotation class Duplicated
 annotation class NullToReduceObjects
