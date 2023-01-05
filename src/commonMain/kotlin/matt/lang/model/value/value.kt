@@ -1,5 +1,7 @@
 package matt.lang.model.value
 
+import kotlin.jvm.JvmInline
+
 interface ValueWrapperIdea
 
 interface ValueWrapper<T>: ValueWrapperIdea {
@@ -8,7 +10,8 @@ interface ValueWrapper<T>: ValueWrapperIdea {
 
 /*perfect for wen null is not the same thing as empty*/
 /*should be value class*/
-class Value<T>(override val value: T): ValueWrapper<T> {
+@JvmInline
+value class Value<T>(override val value: T): ValueWrapper<T> {
   companion object {
 	init {
 	  if (KotlinVersion.CURRENT.isAtLeast(1, 8)) {
