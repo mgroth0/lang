@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalStdlibApi::class)
+
 package matt.lang
 
 import kotlin.contracts.InvocationKind.AT_LEAST_ONCE
