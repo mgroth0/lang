@@ -152,7 +152,7 @@ fun <T> MutableCollection<T>.setAll(vararg c: T) {
 
 fun <E> MutableList<E>.setAllWithMinimalChanges(vararg c: E) {
   var nextIndex = 0
-  (0 until minOf(c.size, size)).forEachIndexed { i, it ->
+  (0 ..< minOf(c.size, size)).forEachIndexed { i, it ->
 	if (get(i) != it) {
 	  set(i, c[it])
 	}
@@ -162,7 +162,7 @@ fun <E> MutableList<E>.setAllWithMinimalChanges(vararg c: E) {
   if (size > c.size) {
 	subList(nextIndex, size).clear()
   } else if (c.size > size) {
-	(nextIndex until c.size).forEach {
+	(nextIndex ..< c.size).forEach {
 	  add(c[it])
 	}
   }
